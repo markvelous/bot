@@ -66,7 +66,13 @@ async function monitorPrice() {
 
   try {
 
-    // Add more pairs here
+    await checkPair({
+      inputTokenSymbol: 'ETH',
+      inputTokenAddress: '0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee',
+      outputTokenSymbol: 'NEXO',
+      outputTokenAddress: '0xB62132e35a6c13ee1EE0f84dC5d40bad8d815206',
+      inputAmount: web3.utils.toWei('1', 'ETHER')
+    })
 
     await checkPair({
       inputTokenSymbol: 'ETH',
@@ -79,26 +85,20 @@ async function monitorPrice() {
     await checkPair({
       inputTokenSymbol: 'ETH',
       inputTokenAddress: '0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee',
-      outputTokenSymbol: 'LINK',
-      outputTokenAddress: '0x514910771af9ca656af840dff83e8264ecf986ca',
+      outputTokenSymbol: 'BNB',
+      outputTokenAddress: '0xB8c77482e45F1F44dE1745F52C74426C631bDD52',
       inputAmount: web3.utils.toWei('1', 'ETHER')
     })
 
     await checkPair({
       inputTokenSymbol: 'ETH',
       inputTokenAddress: '0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee',
-      outputTokenSymbol: 'KNC',
-      outputTokenAddress: '0xdd974d5c2e2928dea5f71b9825b8b646686bd200',
+      outputTokenSymbol: 'UNI',
+      outputTokenAddress: '0x1f9840a85d5aF5bf1D1762F925BDADdC4201F984',
       inputAmount: web3.utils.toWei('1', 'ETHER')
     })
 
-    await checkPair({
-      inputTokenSymbol: 'ETH',
-      inputTokenAddress: '0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee',
-      outputTokenSymbol: 'DAI',
-      outputTokenAddress: '0x6b175474e89094c44da98b954eedeac495271d0f',
-      inputAmount: web3.utils.toWei('1', 'ETHER')
-    })
+    // Add more pairs here
 
   } catch (error) {
     console.error(error)
