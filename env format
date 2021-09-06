@@ -1,0 +1,3 @@
+RPC_URL=<ETH RPC like Infura or ALchemy in the format https://mainnet.infura.io/v3/<API key>
+PRIVATE_KEY=<Private key of wallet account>
+ACCOUNT=<Wallet account>

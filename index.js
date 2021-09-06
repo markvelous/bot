@@ -37,17 +37,18 @@ async function checkPair(args) {
   const { inputTokenSymbol, inputTokenAddress, outputTokenSymbol, outputTokenAddress, inputAmount } = args
 
   const exchangeAddress = await uniswapFactoryContract.methods.getExchange(outputTokenAddress).call()
-  const exchangeContract = new web3.eth.Contract(UNISWAP_EXCHANGE_ABI, exchangeAddress)
 
+  const exchangeContract = new web3.eth.Contract(UNISWAP_EXCHANGE_ABI, exchangeAddress)
   const uniswapResult = await exchangeContract.methods.getEthToTokenInputPrice(inputAmount).call()
-  let kyberResult = await kyberRateContract.methods.getExpectedRate(inputTokenAddress, outputTokenAddress, inputAmount, true).call()
+
+  const kyberResult = await kyberRateContract.methods.getExpectedRate(inputTokenAddress, outputTokenAddress, inputAmount, true).call()
 
   console.table([{
     'Input Token': inputTokenSymbol,
     'Output Token': outputTokenSymbol,
     'Input Amount': web3.utils.fromWei(inputAmount, 'Ether'),
     'Uniswap Return': web3.utils.fromWei(uniswapResult, 'Ether'),
-    'Kyber Expected Rate': web3.utils.fromWei(kyberResult.expectedRate, 'Ether'),
+    // 'Kyber Expected Rate': web3.utils.fromWei(kyberResult.expectedRate, 'Ether'),
     'Kyber Min Return': web3.utils.fromWei(kyberResult.slippageRate, 'Ether'),
     'Timestamp': moment().tz('Singapore').format(),
   }])
@@ -69,18 +70,18 @@ async function monitorPrice() {
     await checkPair({
       inputTokenSymbol: 'ETH',
       inputTokenAddress: '0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee',
-      outputTokenSymbol: 'NEXO',
-      outputTokenAddress: '0xB62132e35a6c13ee1EE0f84dC5d40bad8d815206',
-      inputAmount: web3.utils.toWei('1', 'ETHER')
-    })
-
-    await checkPair({
-      inputTokenSymbol: 'ETH',
-      inputTokenAddress: '0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee',
       outputTokenSymbol: 'MKR',
       outputTokenAddress: '0x9f8f72aa9304c8b593d555f12ef6589cc3a579a2',
       inputAmount: web3.utils.toWei('1', 'ETHER')
     })
+
+    // await checkPair({
+    //    inputTokenSymbol: 'ETH',
+    //    inputTokenAddress: '0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee',
+    //    outputTokenSymbol: 'AMP',
+    //    outputTokenAddress: '0xfF20817765cB7f73d4bde2e66e067E58D11095C2',
+    //    inputAmount: web3.utils.toWei('1', 'ETHER')
+    // })
 
     await checkPair({
       inputTokenSymbol: 'ETH',
